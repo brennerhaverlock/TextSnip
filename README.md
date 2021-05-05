@@ -1,3 +1,3 @@
-# My Project
+# TextSnip
 
-Add project description here.
+A local message board for the web using Python and Flask 
