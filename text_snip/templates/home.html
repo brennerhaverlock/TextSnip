@@ -2,15 +2,14 @@
 {% block content %}
 
 <h1>Text Snip</h1>
-
+<link rel="shortcut icon" type="image/jpg" href="/favicon.ico"/>
 <p><em>The best place to chat amoung local residents</em></p>
 
 <h2>All Posts</h2>
 
 {% for post in all_posts %}
 <div class="post">
-    <a href="/post/{{ post.id }}">{{ post.title }}</a> - 
-    {{ post.posts|length }} posts
+    <a href="/post/{{ post.id }}">{{ post.title }}</a>
 </div>
 {% endfor %}
 

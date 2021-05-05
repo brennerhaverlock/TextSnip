@@ -1,13 +1,12 @@
 {% extends 'base.html' %} {% block content %}
 
-<h1>Cart for - {{ user }}</h1>
+<h1>Posts for - {{ user }}</h1>
 
 <ul>
   {% for post in user.posts %}
   <a href="/post/{{ post.id }}"
-    ><img src="{{ post.photo_url }}" alt="{{ post.name }}" width="200px" />
-    <p><strong>{{ post.name }}</strong></p></a
-  >
+    ><p>
+    <p><strong>{{ post.title }}</strong></p></a>    
   {% endfor %}
 </ul>
 

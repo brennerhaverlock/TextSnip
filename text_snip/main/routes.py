@@ -104,6 +104,13 @@ def post_detail(post_id):
     return render_template('post_detail.html', post=post, form = form)
 
 
+@main.route('/view_posts')
+@login_required
+def view_posts():
+    user = current_user
+
+    return render_template('view_posts.html', user=user)
+
 @main.route('/add_to_profile/<post_id>', methods=['POST'])
 @login_required
 def add_to_profile(post_id):
@@ -112,14 +119,9 @@ def add_to_profile(post_id):
     user.posts.append(post)
     db.session.add(user)
     db.session.commit()
-    flash('Item added to cart successfully')
+    flash('Post added to profile successfully')
     return redirect(url_for('main.view_posts'))
 
-@main.route('/view_posts')
-@login_required
-def view_cart():
-    user = current_user
 
-    return render_template('view_posts.html', user=user)
 
 

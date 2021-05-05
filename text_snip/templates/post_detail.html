@@ -9,6 +9,10 @@
 
 <h2>Edit Post</h2>
 
+<form action="{{ url_for('main.add_to_profile', post_id=post.id) }}" method="POST">
+    <button type="submit">Add post to profile</button>
+  </form>
+
 <form
   action="{{ url_for('main.post_detail', post_id=post.id) }}"
   method="POST"
