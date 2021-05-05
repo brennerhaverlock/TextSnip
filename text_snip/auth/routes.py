@@ -7,6 +7,7 @@ from flask_bcrypt import Bcrypt
 
 bcrypt = Bcrypt(app)
 
+main = Blueprint("main", __name__)
 auth = Blueprint('auth', __name__)
 
 @auth.route('/signup', methods=['GET', 'POST'])
@@ -44,3 +45,65 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('main.homepage'))
+
+@main.route('/')
+def homepage():
+    all_posts = Post.query.all()
+    print(all_posts)
+    return render_template('home.html', all_posts=all_posts)
+
+@main.route('/new_post', methods=['GET', 'POST'])
+@login_required
+def new_post():
+    form = PostForm()
+
+    if form.validate_on_submit():
+        post = Post(
+            title = form.title.data,
+            description = form.description.data,
+            created_by = current_user,
+        )
+        db.session.add(post)
+        db.session.commit()
+
+        flash('New post was created')
+        return redirect(url_for('main.post_detail', post_id=post.id))
+
+    return render_template('new_post.html', form = form)
+
+@main.route('/post/<post_id>', methods=['GET', 'POST'])
+@login_required
+def post_detail(post_id):
+    post = Post.query.get(post_id)
+    form = PostForm(obj=post)
+
+    if form.validate_on_submit():
+        post.title = form.title.data
+        post.description = form.address.data
+        db.session.add(post)
+        db.session.commit()
+
+        flash('Post was updated')
+        return redirect(url_for('main.post_detail', post_id=post.id))
+
+    post = Post.query.get(post_id)
+    return render_template('post_detail.html', post=post, form = form)
+
+
+@main.route('/add_to_profile/<post_id>', methods=['POST'])
+@login_required
+def add_to_profile(post_id):
+    user = current_user
+    post = Post.query.get(post_id)
+    user.posts.append(post)
+    db.session.add(user)
+    db.session.commit()
+    flash('Item added to cart successfully')
+    return redirect(url_for('main.view_posts'))
+
+@main.route('/view_posts')
+@login_required
+def view_cart():
+    user = current_user
+
+    return render_template('view_posts.html', user=user)
