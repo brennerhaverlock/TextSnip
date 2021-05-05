@@ -8,7 +8,7 @@
 <h2>All Posts</h2>
 
 {% for post in all_posts %}
-<div class="store">
+<div class="post">
     <a href="/post/{{ post.id }}">{{ post.title }}</a> - 
     {{ post.posts|length }} posts
 </div>
