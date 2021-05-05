@@ -2,7 +2,6 @@
 from sqlalchemy_utils import URLType
 from text_snip import db
 from text_snip.utils import FormEnum
-
 from flask_login import UserMixin
 
 
