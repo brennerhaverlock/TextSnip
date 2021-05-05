@@ -1,0 +1,24 @@
+{% extends 'base.html' %} {% block content %}
+
+<h1>New Post</h1>
+<form action="{{ url_for('main.new_post') }}" method="POST">
+  {{ form.csrf_token }}
+  <fieldset>
+    <legend>Enter a title</legend>
+    <div>
+      {{ form.title.label }} {{ form.title }} {% for error in form.title.errors
+      %}
+      <p class="error">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div>
+      {{ form.description.label }} {{ form.description }} {% for error in
+      form.description.errors %}
+      <p class="error">{{ error }}</p>
+      {% endfor %}
+    </div>
+    {{ form.submit }}
+  </fieldset>
+</form>
+
+{% endblock %}

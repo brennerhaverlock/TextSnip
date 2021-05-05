@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>Post - {{ post.title }}</h1>
+
+<strong>Body:</strong> {{ post.description }}
+
+<strong>Created by:</strong> {{post.created_by}}
+
+<h2>Edit Post</h2>
+
+<form
+  action="{{ url_for('main.post_detail', post_id=post.id) }}"
+  method="POST"
+>
+  {{ form.csrf_token }}
+  <fieldset>
+    <legend>Update this post</legend>
+    <div>
+      {{ form.title.label }} {{ form.title }} {% for error in form.title.errors
+      %}
+      <p class="error">{{ error }}</p>
+      {% endfor %}
+    </div>
+    <div>
+      {{ form.description.label }} {{ form.description }} {% for error in
+      form.description.errors %}
+      <p class="error">{{ error }}</p>
+      {% endfor %}
+    </div>
+    {{ form.submit }}
+  </fieldset>
+</form>
+
+{% endblock %}

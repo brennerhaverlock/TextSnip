@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Text Snip Local</title>
+        <link rel="stylesheet" href="/static/style.css">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div id="content">
+            {% for message in get_flashed_messages() %}
+                <p>{{ message }}</p>
+            {% endfor %}
+            <nav>
+                <a href="/">Home</a>
+                <div>
+                    {% if current_user.is_authenticated %}
+                    <a href="/new_post">New Post</a>
+                    <a href="/logout">Log Out</a>
+                    <a href="/view_posts">Posts</a>
+                    {% else %}
+                    <a href="/login">Log In</a>
+                    <a href="/signup">Sign up</a>
+                    {% endif %}
+                </div>
+            </nav>
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+</html>
