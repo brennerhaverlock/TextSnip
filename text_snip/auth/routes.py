@@ -1,11 +1,12 @@
 from flask import Blueprint, request, render_template, redirect, url_for, flash
 from datetime import date, datetime
-from text_snip.models import User
+from text_snip.models import User, Post
 from text_snip.auth.forms import SignUpForm, LoginForm
 from flask_login import login_user, logout_user, login_required, current_user
-from flask_bcrypt import Bcrypt
+from text_snip import bcrypt
 
-bcrypt = Bcrypt(app)
+from text_snip import app, db
+
 
 main = Blueprint("main", __name__)
 auth = Blueprint('auth', __name__)
