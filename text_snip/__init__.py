@@ -35,11 +35,5 @@ from text_snip.main.routes import main, auth
 app.register_blueprint(main)
 app.register_blueprint(auth)
 
-# from text_snip.main.routes import main as main_routes
-# app.register_blueprint(main_routes)
-
-# from text_snip.auth.routes import auth as auth_routes
-# app.register_blueprint(auth_routes)
-
 with app.app_context():
     db.create_all()
