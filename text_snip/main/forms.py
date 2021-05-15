@@ -20,7 +20,7 @@ class PostForm(FlaskForm):
 class SignUpForm(FlaskForm):
     username = StringField('User Name',
         validators=[DataRequired(), Length(min=3, max=50)])
-    password = PasswordField('Password', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired(), Length(min=3, max=80)])
     submit = SubmitField('Sign Up')
 
     def validate_username(self, username):

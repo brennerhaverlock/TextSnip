@@ -6,7 +6,7 @@ from text_snip.models import User
 
 class SignUpForm(FlaskForm):
     username = StringField('User Name',
-        validators=[DataRequired(), Length(min=3, max=50)])
+        validators=[DataRequired(), Length(min=3, max=70)])
     password = PasswordField('Password', validators=[DataRequired()])
     submit = SubmitField('Sign Up')
 
