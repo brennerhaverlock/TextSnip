@@ -34,8 +34,8 @@ class Post(db.Model):
 class User(UserMixin, db.Model):
     """User model."""
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), nullable=False)
-    password = db.Column(db.String(50), nullable=False)
+    username = db.Column(db.String(80), nullable=False)
+    password = db.Column(db.String(80), nullable=False)
     posts = db.relationship('Post', secondary='user_posts', back_populates='users_post')
 
     def __str__(self):
